@@ -1,7 +1,7 @@
 
 function Letter(letr){
 	this.letr = letr;
-	this.guessed = false;
+	this.guessed = true;
 
     this.guess = function(letter){
     	if(letter === this.letr){

@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/HarryCaveMan/Hangman_Constructors/issues"
   },
-  "homepage": "https://github.com/HarryCaveMan/Hangman_Constructors#readme"
+  "homepage": "https://github.com/HarryCaveMan/Hangman_Constructors#readme",
+  "dependencies": {
+    "inquirer": "^5.1.0"
+  }
 }
