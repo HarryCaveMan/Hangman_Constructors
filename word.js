@@ -1,4 +1,7 @@
-const wordList = ['grenadine',
+
+
+
+const wordList = ['grenadine',  //random list of words scraped during first hangman
 'pomegranate',
 'hefty',
 'gladiolus',
@@ -86,18 +89,51 @@ const wordList = ['grenadine',
 'famine',
 'eradicate'];
 
+const alpha = ' abcdefghijklmnopqrstuvwxyz' //the alphabet plus spacebar
 
-const letr = require('./letter.js');
+const L = require('./letter.js');  //import letter module for Letter class
 
 function Word(str){
+    this.guessed = 0;
+
+	this.alphabet = [];
+	for(let i=0 ; i<alpha.length ; i++){
+		this.alphabet.push(L.Letter(alpha[i]));
+	}
 	this.letterArray =[];
 	for(let i=0 ; i<str.length ; i++){
-		this.letterArray.push(letr.Letter(str[i]))
+		this.letterArray.push(L.Letter(str[i]))
+	}
+
+	this.isSolved = function(){
+		return (this.guessed === this.letterArray.length);
+	}
+
+	this.search = function(input){
+
+		found = false;
+		for(let i=0 ; i<str.length ; i++){
+			if(this.letterArray[i].guess(input)){
+				this.guessed++;
+				found=true;
+				
+			}
+		}
+		for(let i=0 ; i<alpha.length ; i++){
+			this.alphabet[i].guess(input);			
+		}
+		return found;
 	}
 	this.toString = function(){
 		let output = [];
 		for(let i=0 ; i<this.letterArray.length ; i++){
 			output.push(this.letterArray[i].display());
+		}
+		for(let i=0 ; i<5 ; i++){
+			output.push(' ');
+		}
+		for(let i=0 ; i<alpha.length ; i++){
+			output.push(this.alphabet[i].display());
 		}
 		return output.join('');
 	}
